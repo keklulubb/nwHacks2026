@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc; 
+  --foreground: #1e293b;
 }
 
 @theme inline {
@@ -19,8 +19,21 @@
   }
 }
 
+/* Enable scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Use stronger colors temporarily to confirm it's working */
+  background: linear-gradient(
+    180deg, 
+    #ddbfb4 0%,    /* Top: Pure White */
+    #dbeafe 35%,   /* Middle: Light Blue (Indigo 100) */
+    #d1fae5 70%,   /* Lower: Light Green (Emerald 100) */
+    #ccfbf1 100%   /* Bottom: Light Teal */
+  );
+  background-attachment: scroll;
+  min-height: 200vh;
 }

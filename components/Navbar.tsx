@@ -2,20 +2,15 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="border-b">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-        <Link href="/" className="font-semibold">
-          Stress Budgeting
-        </Link>
-        <nav className="flex gap-4 text-sm">
-          <Link className="hover:underline" href="/log">
-            Log
-          </Link>
-          <Link className="hover:underline" href="/week">
-            Week
-          </Link>
-        </nav>
-      </div>
-    </header>
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6">
+  <nav className="w-full max-w-5xl flex items-center justify-between px-6 py-3 bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-sm">
+    <div className="font-bold text-slate-900 tracking-tight">STRESS BUDGET</div>
+    <div className="flex gap-6 text-sm font-medium text-slate-500">
+      <a href="#log" className="hover:text-indigo-600 transition-colors">Log</a>
+      <a href="#insights" className="hover:text-indigo-600 transition-colors">Insights</a>
+      <a href="#recommend" className="hover:text-indigo-600 transition-colors">Relief</a>
+    </div>
+  </nav>
+</header>
   );
 }
