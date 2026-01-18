@@ -19,13 +19,7 @@ export default function StressChart() {
           {/* grid lines */}
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.1)" />
           
-          <XAxis 
-            dataKey="day" 
-            axisLine={false} 
-            tickLine={false} 
-            tick={{ fill: '#64748b', fontSize: 12 }} 
-            dy={10}
-          />
+          
           
           <YAxis hide domain={[0, 100]} />
           
