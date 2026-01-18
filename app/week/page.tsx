@@ -1,13 +1,10 @@
-import { seedTasks } from "@/lib/seed";
+import {currentWeekIndex, seedTasks, taskStressChanges} from "@/lib/seed";
 
 export default function WeekPage() {
+
   const tasks = seedTasks;
 
-  const deltas = tasks.map((t) => ({
-    ...t,
-    delta: t.stressAfter - t.stressBefore,
-  }));
-
+  const deltas = taskStressChanges(tasks);
   const mostDraining = deltas.reduce((a, b) => (b.delta > a.delta ? b : a));
   const bestBooster = deltas.reduce((a, b) => (b.delta < a.delta ? b : a));
 

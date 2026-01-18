@@ -4,13 +4,7 @@ import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
 import { Plus, Sparkles } from "lucide-react";
 
-import {prioritizeTasks, suggestDeStress} from "@/lib/gemini";
-import {Task, seedTasks} from "@/lib/seed";
-
-
 export default function HomePage() {
-  //prioritizeTasks(seedTasks);
-  suggestDeStress(75);
   return (
     <main className="relative min-h-screen w-full">
       <LiquidBackground />
@@ -50,7 +44,7 @@ export default function HomePage() {
                   <input type="checkbox" className="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500" />
                   <span className="font-medium text-slate-700">{task}</span>
                 </div>
-                
+
               ))}
               <div className="flex items-center gap-2 mb-6">
                     <Sparkles className="text-indigo-400" size={20} />
