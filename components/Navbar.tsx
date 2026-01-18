@@ -13,7 +13,7 @@ export default function Navbar() {
           {/* These two go to different parts of the Dashboard page */}
           <Link href="/dashboard#log" className="hover:text-indigo-600 transition-colors">Log Task</Link>
           <Link href="/dashboard#insights" className="hover:text-indigo-600 transition-colors">Insights</Link>
-          {/* This goes to the new Relief page */}
+          {/* This goes to the Relief page */}
           <Link href="/Relief" className="hover:text-emerald-600 transition-colors">Relief Center</Link>
         </div>
       </nav>

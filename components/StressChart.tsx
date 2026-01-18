@@ -16,7 +16,7 @@ export default function StressChart() {
     <div className="w-full h-full min-h-[200px]">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
-          {/* Subtle grid lines */}
+          {/* grid lines */}
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.1)" />
           
           <XAxis 
@@ -42,7 +42,7 @@ export default function StressChart() {
           <Line 
             type="monotone" 
             dataKey="stress" 
-            stroke="#4f46e5" // Indigo 600
+            stroke="#4f46e5" 
             strokeWidth={4} 
             dot={{ r: 4, fill: '#4f46e5', strokeWidth: 2, stroke: '#fff' }}
             activeDot={{ r: 8, strokeWidth: 0 }}
