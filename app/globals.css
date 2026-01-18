@@ -1,38 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #f8fafc; 
-  --foreground: #1e293b;
-}
+@theme {
+  --animate-liquid-slow: liquid 25s infinite;
+  --animate-liquid-medium: liquid 18s infinite reverse;
+  --animate-liquid-fast: liquid 12s infinite;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes liquid {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(10vw, 15vh) scale(1.2);
+    }
+    66% {
+      transform: translate(-5vw, 10vh) scale(0.8);
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
   }
 }
 
+/* Ensure the main content doesn't have a background */
+body {
+  background-color: #93d6f1;
+  margin: 0;
+}
 /* Enable scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-body {
-  color: var(--foreground);
-  background: linear-gradient(
-    180deg, 
-    #ffa630 0%,    /* Top*/
-    #ebebeb 45%,   /* Middle*/
-    #00a7e1 80%,   /* Lower */
-    #0474ba 100%   /* Bottom*/
-  );
-  background-attachment: scroll;
-  min-height: 200vh;
-}

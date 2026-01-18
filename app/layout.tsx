@@ -1,16 +1,24 @@
+import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Configure the Body font
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+// Configure the Heading font
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
-        <Navbar />
-        <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+      {/* Apply the font variables to the body */}
+      <body className={`${inter.variable} ${manrope.variable} antialiased`}>
+        {children}
       </body>
     </html>
   );
