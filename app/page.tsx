@@ -4,9 +4,13 @@ import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
 import { Plus, Sparkles } from "lucide-react";
 
+import {prioritizeTasks, suggestDeStress} from "@/lib/gemini";
+import {Task, seedTasks} from "@/lib/seed";
 
 
 export default function HomePage() {
+  //prioritizeTasks(seedTasks);
+  suggestDeStress(75);
   return (
     <main className="relative min-h-screen w-full">
       <LiquidBackground />
