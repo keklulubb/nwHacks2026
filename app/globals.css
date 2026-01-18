@@ -26,13 +26,12 @@ html {
 
 body {
   color: var(--foreground);
-  /* Use stronger colors temporarily to confirm it's working */
   background: linear-gradient(
     180deg, 
-    #ddbfb4 0%,    /* Top: Pure White */
-    #dbeafe 35%,   /* Middle: Light Blue (Indigo 100) */
-    #d1fae5 70%,   /* Lower: Light Green (Emerald 100) */
-    #ccfbf1 100%   /* Bottom: Light Teal */
+    #ffa630 0%,    /* Top*/
+    #ebebeb 45%,   /* Middle*/
+    #00a7e1 80%,   /* Lower */
+    #0474ba 100%   /* Bottom*/
   );
   background-attachment: scroll;
   min-height: 200vh;

@@ -39,20 +39,42 @@ export default function HomePage() {
 
 
 
-
-  <section id="dashboard" className="w-full max-w-6xl mx-auto px-6 py-24">
-  <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 
-  gap-4 auto-rows-[250px]">
-
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-6 mt-12">
   
-{/* Card 1: Bar Chart */}
-  <div className="md:col-span-2 bg-white/60 backdrop-blur-md rounded-3xl border border-white/20 p-8 shadow-sm">
-  <h3 className="text-slate-50 text-sm font-bold uppercase-tracking "
-  {/* Card 2 */}
-  {/* Card 3 */}
-  {/* Card 4 */}
-  
-
-
+  {/* Card 1 */}
+  <div className="group p-8 rounded-3xl bg-white/50 backdrop-blur-md border border-white/20 shadow-xl shadow-indigo-500/5 transition-all hover:-translate-y-1">
+    <div className="w-12 h-12 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+      <span className="text-2xl">📝</span>
+    </div>
+    <h3 className="text-xl font-bold text-slate-900 mb-2">Log Tasks</h3>
+    <p className="text-slate-600 leading-relaxed">
+      Quickly record your mental spend before and after every major task. 
+    </p>
   </div>
-</section>
+
+  {/* Card 2 */}
+  <div className="group p-8 rounded-3xl bg-white/50 backdrop-blur-md border border-white/20 shadow-xl shadow-indigo-500/5 transition-all hover:-translate-y-1">
+    <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+      <span className="text-2xl">📈</span>
+    </div>
+    <h3 className="text-xl font-bold text-slate-900 mb-2">See Patterns</h3>
+    <p className="text-slate-600 leading-relaxed">
+      Watch your energy trends over the week. Identify what truly drains you.
+    </p>
+  </div>
+
+  {/* Card 3 */}
+  <div className="group p-8 rounded-3xl bg-white/50 backdrop-blur-md border border-white/20 shadow-xl shadow-indigo-500/5 transition-all hover:-translate-y-1">
+    <div className="w-12 h-12 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+      <span className="text-2xl">✨</span>
+    </div>
+    <h3 className="text-xl font-bold text-slate-900 mb-2">Weekly Audit</h3>
+    <p className="text-slate-600 leading-relaxed">
+      Gemini AI reviews your ledger and tells you where to save your energy.
+    </p>
+  </div>
+
+</div>
+    </div>
+  );
+}
