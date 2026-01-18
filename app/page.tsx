@@ -1,6 +1,8 @@
 import Link from "next/link";
 import LiquidBackground from "./week/liquidbackground";
 import Navbar from "@/components/Navbar";
+import StressChart from "@/components/StressChart";
+
 
 
 export default function HomePage() {
@@ -48,17 +50,21 @@ export default function HomePage() {
           </div>
 
           {/* Stress Trend (Wide Box) */}
-          <div className="md:col-span-2 p-8 bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-white/40 shadow-xl">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Stress Trend</h3>
-            <div className="h-32 w-full bg-slate-200/30 rounded-2xl flex items-center justify-center text-slate-400 italic">
-              Chart loading...
-            </div>
-          </div>
+<div className="md:col-span-2 p-8 bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-white/40 shadow-xl flex flex-col">
+  <h3 className="text-2xl font-bold text-slate-900 tracking-widest mb-4">
+    Stress Trend
+  </h3>
+  
+  {/* The Chart Container - We give it a specific height so Recharts can find its space */}
+  <div className="w-full h-[180px]">
+    <StressChart />
+  </div>
+</div>
 
           {/* Weekly Budget (Small Box) */}
           <div className="md:col-span-2 p-8 bg-[#072c3f] text-white rounded-[2.5rem] shadow-2xl flex flex-col justify-between">
             <div>
-              <h3 className="text-indigo-200 text-sm font-bold uppercase tracking-widest">Weekly Stress Budget</h3>
+              <h3 className="text-indigo-200 text-2xl font-bold mb-6 text-2xl tracking-widest">Weekly Stress Budget</h3>
               <p className="text-4xl font-bold mt-2">60% <span className="text-lg font-normal opacity-80 text-indigo-100">Left</span></p>
             </div>
             <div className="w-full h-3 bg-indigo-900/30 rounded-full overflow-hidden">
