@@ -1,5 +1,7 @@
 import Link from "next/link";
 import LiquidBackground from "./week/liquidbackground";
+import Navbar from "@/components/Navbar";
+
 
 export default function HomePage() {
   return (
