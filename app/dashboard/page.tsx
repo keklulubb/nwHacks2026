@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
@@ -19,7 +19,24 @@ export default function Dashboard() {
   const [newDeadline, setNewDeadline] = useState('');
   const [newPriority, setNewPriority] = useState('Medium');
 
+  // --- TYPING ANIMATION LOGIC ---
   const weekSummary = "### Analysis\nBased on your data, your stress peaked on **Tuesday**. \n\n* **Hardest Task:** Refactoring \n* **Suggestion:** Take a 10m walk to activate the para-effect.";
+  const [displayedSummary, setDisplayedSummary] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const typingSpeed = 30; // Milliseconds per character
+    setDisplayedSummary(""); // Reset
+    
+    const timer = setInterval(() => {
+      setDisplayedSummary(weekSummary.slice(0, i));
+      i++;
+      if (i > weekSummary.length) clearInterval(timer);
+    }, typingSpeed);
+
+    return () => clearInterval(timer);
+  }, []); // Runs once when dashboard opens
+  // ------------------------------
 
   // 2. HELPER FUNCTIONS
   const addTask = () => {
@@ -38,8 +55,10 @@ export default function Dashboard() {
     setTasks([...tasks, newTask]);
     addNewTask(newTask);
     
-    // Fix for the 'tasksChanged' error:
-    if (typeof window !== 'undefined') { (window as any).tasksChanged = true; }
+    // Safety check for tasksChanged
+    if (typeof window !== 'undefined') {
+        (window as any).tasksChanged = true;
+    }
     
     setNewName('');
     setNewDeadline('');
@@ -94,7 +113,7 @@ export default function Dashboard() {
         <section id="insights" className="scroll-mt-32 pt-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* UNASSIGNED BOX (Spans 2 columns) */}
+            {/* UNASSIGNED BOX */}
             <div className="md:col-span-2 p-10 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white/40 shadow-2xl flex flex-col min-h-[450px]">
               <div className="flex justify-between items-start mb-8">
                 <h3 className="text-2xl font-bold text-slate-900 font-display">Unassigned</h3>
@@ -123,7 +142,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* GEMINI AUDIT BOX (Spans 1 column) */}
+            {/* GEMINI AUDIT BOX (Now with Typing Animation) */}
             <div className="bg-[#072c3f] p-10 rounded-[3rem] shadow-2xl text-white flex flex-col min-h-[450px]">
               <div className="flex items-center gap-2 mb-6 shrink-0">
                 <Sparkles className="text-indigo-400" size={20} />
@@ -137,12 +156,15 @@ export default function Dashboard() {
                   [&>ul]:list-disc [&>ul]:ml-4 [&>ul]:mb-4 [&>ul]:text-slate-300
                   [&>strong]:text-white [&>strong]:font-bold
                 ">
-                  <Markdown>{weekSummary}</Markdown>
+                  {/* Using displayedSummary here for typing effect */}
+                  <Markdown>{displayedSummary}</Markdown>
+                  {/* blinking cursor effect */}
+                  <span className="inline-block w-2 h-4 bg-indigo-400 ml-1 animate-pulse" />
                 </div>
               </div> 
             </div>
             
-          </div> {/* End of grid */}
+          </div> 
         </section>
       </div>
 
@@ -153,7 +175,7 @@ export default function Dashboard() {
           <div className="relative w-full max-w-7xl bg-white/80 backdrop-blur-3xl rounded-[3rem] border border-white/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-8 flex justify-between items-center border-b border-slate-200/50">
               <h2 className="text-3xl font-bold text-slate-900 font-display">Weekly Audit View</h2>
-              <button onClick={() => setIsModalOpen(false)} className="p-3 bg-slate-100 rounded-full hover:bg-rose-100"><X size={24} /></button>
+              <button onClick={() => setIsModalOpen(false)} className="p-3 bg-slate-100 rounded-full hover:bg-rose-100 transition-all"><X size={24} /></button>
             </div>
             <div className="flex-1 overflow-y-auto p-8 h-64">
               <StressChart />
@@ -171,15 +193,15 @@ export default function Dashboard() {
               <h2 className="text-2xl font-bold text-slate-900 font-display">New Task</h2>
               <button onClick={() => setIsAddTaskOpen(false)}><X className="text-slate-400" /></button>
             </div>
-            <div className="space-y-5">
-              <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Task Name" />
-              <input type="date" value={newDeadline} onChange={(e) => setNewDeadline(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none" />
-              <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none">
-                <option value="High">High Priority</option>
-                <option value="Medium">Medium Priority</option>
-                <option value="Low">Low Priority</option>
+            <div className="space-y-5 text-slate-900">
+              <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl" placeholder="Task Name" />
+              <input type="date" value={newDeadline} onChange={(e) => setNewDeadline(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl" />
+              <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
               </select>
-              <button onClick={addTask} className="w-full py-4 bg-[#072c3f] text-white rounded-2xl font-bold hover:bg-slate-800 transition-all">Add to Ledger</button>
+              <button onClick={addTask} className="w-full py-4 bg-[#072c3f] text-white rounded-2xl font-bold">Add to Ledger</button>
             </div>
           </div>
         </div>
