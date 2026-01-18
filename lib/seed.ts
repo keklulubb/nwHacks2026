@@ -41,7 +41,13 @@ export function setGlobals() {
             { id: "16", title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: 5, completed: true, completedDate: 1 },
         ],
         [
-            //
+            { id: "17", title: "Math homework", stressBefore: 90, stressAfter: 75, deadline: 5, completed: true, completedDate: 1 },
+            { id: "18", title: "Group Project", stressBefore: 75, stressAfter: 50, deadline: 5, completed: true, completedDate: 2 },
+            { id: "19", title: "Work out", stressBefore: 50, stressAfter: 60, deadline: 5, completed: true, completedDate: 2 },
+            { id: "20", title: "Listen to music", stressBefore: 60, stressAfter: 70, deadline: 5, completed: true, completedDate: 3 },
+            { id: "21", title: "Reply to emails", stressBefore: 70, stressAfter: 65, deadline: 5, completed: true, completedDate: 3 },
+            { id: "22", title: "Finish presentation slides", stressBefore: 65, stressAfter: 65, deadline: 5, completed: false, completedDate: 0 },
+            { id: "23", title: "Online meeting", stressBefore: 50, stressAfter: 65, deadline: 65, completed: false, completedDate: 0 },
         ],
     ];
     globalThis.currentWeek = 2;
@@ -98,7 +104,7 @@ export function setGlobals() {
 }
 
 export function taskDateToDayOfWeek(task: Task) {
-    const strings = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const strings = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     if (task.completed) {
         if (task.completedDate < strings.length && task.completedDate >= 0) {
             return strings[task.completedDate];

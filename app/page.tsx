@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
 import { Plus, Sparkles } from "lucide-react";
 import {prioritizeTasks, suggestDeStress} from "@/lib/gemini";
-import {checkSetGlobals, setGlobals, Task} from "@/lib/seed";
+import {checkSetGlobals, Task} from "@/lib/seed";
 import Markdown from "react-markdown";
 
 export default async function HomePage() {

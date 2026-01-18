@@ -11,6 +11,8 @@ export default function Dashboard() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+  checkSetGlobals();
+
   // Task List State
   const [tasks, setTasks] = useState([
     { id: 1, name: 'Midterm Prep', deadline: '2024-01-20', priority: 'High' },
@@ -37,8 +39,6 @@ export default function Dashboard() {
     setNewPriority('Medium');
     setIsAddTaskOpen(false);
   };
-
-  checkSetGlobals();
 
   return (
     <main className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden">
