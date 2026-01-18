@@ -3,6 +3,8 @@ import { useState } from 'react';
 import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
+import Markdown from "react-markdown";
+import {checkSetGlobals} from "@/lib/seed";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +37,8 @@ export default function Dashboard() {
     setNewPriority('Medium');
     setIsAddTaskOpen(false);
   };
+
+  checkSetGlobals();
 
   return (
     <main className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden">
@@ -113,6 +117,7 @@ export default function Dashboard() {
               <div className="flex items-center gap-2 mb-6">
                 <Sparkles className="text-indigo-400" size={20} />
                 <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
+                <Markdown>{weekSummary}</Markdown>
               </div> 
             </div>
           </div>
