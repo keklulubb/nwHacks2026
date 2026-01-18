@@ -142,7 +142,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* GEMINI AUDIT BOX (Now with Typing Animation) */}
+            {/* GEMINI AUDIT BOX ( with Typing Animation) */}
             <div className="bg-[#072c3f] p-10 rounded-[3rem] shadow-2xl text-white flex flex-col min-h-[450px]">
               <div className="flex items-center gap-2 mb-6 shrink-0">
                 <Sparkles className="text-indigo-400" size={20} />
@@ -156,7 +156,7 @@ export default function Dashboard() {
                   [&>ul]:list-disc [&>ul]:ml-4 [&>ul]:mb-4 [&>ul]:text-slate-300
                   [&>strong]:text-white [&>strong]:font-bold
                 ">
-                  {/* Using displayedSummary here for typing effect */}
+                  {/* Using displayedSummary for typing effect */}
                   <Markdown>{displayedSummary}</Markdown>
                   {/* blinking cursor effect */}
                   <span className="inline-block w-2 h-4 bg-indigo-400 ml-1 animate-pulse" />
