@@ -113,6 +113,37 @@ export function getUnfinishedTasks() {
     });
 }
 
+export function getFinishedTasksByDay(day: string) {
+    const weeklyTasks = userTasks[currentWeek];
+    const date = taskDayOfWeekToDate(day);
+
+    return weeklyTasks.filter((task) => {
+        return task.completed && task.completedDate === date
+    });
+}
+
+export function addNewTask(task: Task) {
+    userTasks[currentWeek].push(task);
+    tasksChanged = true;
+}
+
+export function setFlag(action: string) {
+    switch (action) {
+        case "finish":
+            stressChanged = true;
+            break;
+        case "add":
+            tasksChanged = true;
+            break;
+        case "time":
+            weekChanged = true;
+            break;
+        default:
+            return;
+    }
+}
+
+
 export function taskDateToDayOfWeek(task: Task) {
     const strings = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     if (task.completed) {
@@ -122,6 +153,12 @@ export function taskDateToDayOfWeek(task: Task) {
     }
     return "";
 }
+export function taskDayOfWeekToDate(day: string) {
+    const strings = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    return strings.indexOf(day) != -1 ? strings.indexOf(day) : 0;
+}
+
+
 export function taskStressChanges(tasks: Task[]) {
     return tasks.filter((t) => (
         t.completed

@@ -4,7 +4,7 @@ import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
 import Markdown from "react-markdown";
-import {checkSetGlobals, getUnfinishedTasks, Task} from "@/lib/seed";
+import {addNewTask, checkSetGlobals, getFinishedTasksByDay, getUnfinishedTasks, setFlag, Task} from "@/lib/seed";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,12 +31,17 @@ export default function Dashboard() {
     if (!newName) return;
     const newTask = {
       id: Date.now(),
-      name: newName,
+      title: newName,
       deadline: newDeadline,
       priority: newPriority,
-      stressBefore: 90, stressAfter: 75, completed: true, completedDate: 1
+      stressBefore: 0,
+      stressAfter: 0,
+      completed: false,
+      completedDate: 0,
     };
     setTasks([...tasks, newTask]);
+    addNewTask(newTask);
+    tasksChanged = true;
     setNewName('');
     setNewDeadline('');
     setNewPriority('Medium');
@@ -44,7 +49,16 @@ export default function Dashboard() {
   };
 
   const markTaskComplete = () => {
-      //
+      //track down the ID of which task triggered the event, mark the corresponding
+      //element in userTasks[currentWeek] as completed, and put down the completedDate as
+      //currentDay
+
+      //set the stressBefore of the task to stressLevel
+      //then, set stressAfter and stressLevel to the stress level indicated on the menu
+
+      //set the flags tasksChanged and stressChanged
+
+      //refresh the page somehow
   };
 
   return (
@@ -73,6 +87,22 @@ export default function Dashboard() {
               {days.map((day) => (
                 <div key={day} className="w-[350px] flex-shrink-0 flex flex-col bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-white/40 p-6 h-[450px] transition-all hover:bg-white/50">
                   <span className="text-sm font-black text-slate-400 uppercase tracking-tighter mb-4">{day}</span>
+                    {getFinishedTasksByDay(day).map((task) => (
+                        <div key={task.id} className="p-4 bg-white/60 rounded-2xl border border-white/20 shadow-sm flex justify-between items-center group hover:bg-white/80 transition-all">
+                            <div>
+                                <p className="text-sm font-bold text-slate-700">{task.title}</p>
+                                <p className="text-[10px] text-slate-400 font-medium uppercase mt-1 flex items-center gap-1">
+                                    <Calendar size={10} /> {task.deadline || 'No Deadline'}
+                                </p>
+                            </div>
+                            <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${
+                                task.priority === 'High' ? 'bg-rose-100 text-rose-600' :
+                                    task.priority === 'Medium' ? 'bg-indigo-100 text-indigo-600' : 'bg-emerald-100 text-emerald-600'
+                            }`}>
+                      {task.priority}
+                    </span>
+                        </div>
+                    ))}
                   <div className="flex-1 rounded-3xl border-2 border-dashed border-white/40 flex flex-col items-center justify-center gap-2 text-white/40 group hover:border-indigo-300 hover:bg-white/20 transition-all cursor-pointer">
                     <Plus size={24} className="group-hover:scale-125 transition-transform" />
                     <span className="text-[10px] font-bold uppercase">Budget Task</span>

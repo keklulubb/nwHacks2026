@@ -10,8 +10,11 @@ import Markdown from "react-markdown";
 export default async function HomePage() {
   checkSetGlobals();
 
+  console.log("home page");
+
   if (tasksChanged || tasksPriority.length == 0) {
       //filter for this week's unfinished tasks
+      console.log(userTasks[currentWeek]);
       const unfinishedTasks = userTasks[currentWeek].filter((t) => (!t.completed));
 
       if (unfinishedTasks.length <= 3) {
