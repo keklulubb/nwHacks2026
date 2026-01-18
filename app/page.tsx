@@ -2,10 +2,12 @@ import Link from "next/link";
 import LiquidBackground from "./week/liquidbackground";
 import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
-
+import {prioritizeTasks} from "@/lib/gemini";
+import {Task, seedTasks} from "@/lib/seed";
 
 
 export default function HomePage() {
+  prioritizeTasks(seedTasks);
   return (
     <main className="relative min-h-screen w-full">
       <LiquidBackground />
