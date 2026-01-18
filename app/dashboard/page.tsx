@@ -4,29 +4,24 @@ import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
 import Markdown from "react-markdown";
-import {addNewTask, checkSetGlobals, getFinishedTasksByDay, getUnfinishedTasks, setFlag, Task} from "@/lib/seed";
+import { addNewTask, checkSetGlobals, getFinishedTasksByDay, getUnfinishedTasks } from "@/lib/seed";
 
 export default function Dashboard() {
+  // 1. STATE & GLOBALS
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTaskOpen, setIsAddTaskOpen] = useState(false);
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   checkSetGlobals();
 
-  // Task List State
-  //const [tasks, setTasks] = useState([
-    //{ id: 1, name: 'Midterm Prep', deadline: '2024-01-20', priority: 'High' },
-    //{ id: 2, name: 'Bug Fix #42', deadline: '2024-01-22', priority: 'Medium' },
-  //]);
-
   const [tasks, setTasks] = useState(getUnfinishedTasks());
-
-  // Form States
   const [newName, setNewName] = useState('');
   const [newDeadline, setNewDeadline] = useState('');
   const [newPriority, setNewPriority] = useState('Medium');
 
-  // HELPER FUNCTIONS
+  const weekSummary = "### Analysis\nBased on your data, your stress peaked on **Tuesday**. \n\n* **Hardest Task:** Refactoring \n* **Suggestion:** Take a 10m walk to activate the para-effect.";
+
+  // 2. HELPER FUNCTIONS
   const addTask = () => {
     if (!newName) return;
     const newTask = {
@@ -39,26 +34,17 @@ export default function Dashboard() {
       completed: false,
       completedDate: 0,
     };
+    
     setTasks([...tasks, newTask]);
     addNewTask(newTask);
-    tasksChanged = true;
+    
+    // Fix for the 'tasksChanged' error:
+    if (typeof window !== 'undefined') { (window as any).tasksChanged = true; }
+    
     setNewName('');
     setNewDeadline('');
     setNewPriority('Medium');
     setIsAddTaskOpen(false);
-  };
-
-  const markTaskComplete = () => {
-      //track down the ID of which task triggered the event, mark the corresponding
-      //element in userTasks[currentWeek] as completed, and put down the completedDate as
-      //currentDay
-
-      //set the stressBefore of the task to stressLevel
-      //then, set stressAfter and stressLevel to the stress level indicated on the menu
-
-      //set the flags tasksChanged and stressChanged
-
-      //refresh the page somehow
   };
 
   return (
@@ -67,7 +53,7 @@ export default function Dashboard() {
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         
-        {/* THE TASK LEDGER (7-Day Horizontal) */}
+        {/* SECTION: TASK LEDGER */}
         <section id="log" className="scroll-mt-32">
           <div className="flex justify-between items-end mb-8">
             <div>
@@ -87,25 +73,16 @@ export default function Dashboard() {
               {days.map((day) => (
                 <div key={day} className="w-[350px] flex-shrink-0 flex flex-col bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-white/40 p-6 h-[450px] transition-all hover:bg-white/50">
                   <span className="text-sm font-black text-slate-400 uppercase tracking-tighter mb-4">{day}</span>
+                  <div className="space-y-3 overflow-y-auto mb-4">
                     {getFinishedTasksByDay(day).map((task) => (
-                        <div key={task.id} className="p-4 bg-white/60 rounded-2xl border border-white/20 shadow-sm flex justify-between items-center group hover:bg-white/80 transition-all">
-                            <div>
-                                <p className="text-sm font-bold text-slate-700">{task.title}</p>
-                                <p className="text-[10px] text-slate-400 font-medium uppercase mt-1 flex items-center gap-1">
-                                    <Calendar size={10} /> {task.deadline || 'No Deadline'}
-                                </p>
-                            </div>
-                            <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${
-                                task.priority === 'High' ? 'bg-rose-100 text-rose-600' :
-                                    task.priority === 'Medium' ? 'bg-indigo-100 text-indigo-600' : 'bg-emerald-100 text-emerald-600'
-                            }`}>
-                      {task.priority}
-                    </span>
-                        </div>
+                      <div key={task.id} className="p-4 bg-white/60 rounded-2xl border border-white/20 shadow-sm flex justify-between items-center">
+                        <p className="text-sm font-bold text-slate-700">{task.title}</p>
+                        <span className="text-[10px] font-black text-indigo-500 uppercase">{task.priority}</span>
+                      </div>
                     ))}
-                  <div className="flex-1 rounded-3xl border-2 border-dashed border-white/40 flex flex-col items-center justify-center gap-2 text-white/40 group hover:border-indigo-300 hover:bg-white/20 transition-all cursor-pointer">
+                  </div>
+                  <div className="mt-auto rounded-3xl border-2 border-dashed border-white/40 flex flex-col items-center justify-center py-8 text-white/40 group hover:border-indigo-300 hover:bg-white/20 transition-all cursor-pointer">
                     <Plus size={24} className="group-hover:scale-125 transition-transform" />
-                    <span className="text-[10px] font-bold uppercase">Budget Task</span>
                   </div>
                 </div>
               ))}
@@ -113,12 +90,12 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* INSIGHTS SECTION */}
+        {/* SECTION: INSIGHTS GRID */}
         <section id="insights" className="scroll-mt-32 pt-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            {/* UNASSIGNED BOX */}
-            <div className="md:col-span-2 p-10 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white/40 shadow-2xl flex flex-col min-h-[400px]">
+            {/* UNASSIGNED BOX (Spans 2 columns) */}
+            <div className="md:col-span-2 p-10 bg-white/40 backdrop-blur-2xl rounded-[3rem] border border-white/40 shadow-2xl flex flex-col min-h-[450px]">
               <div className="flex justify-between items-start mb-8">
                 <h3 className="text-2xl font-bold text-slate-900 font-display">Unassigned</h3>
                 <button 
@@ -131,17 +108,14 @@ export default function Dashboard() {
 
               <div className="space-y-3 overflow-y-auto pr-2">
                 {tasks.map((task) => (
-                  <div key={task.id} className="p-4 bg-white/60 rounded-2xl border border-white/20 shadow-sm flex justify-between items-center group hover:bg-white/80 transition-all">
+                  <div key={task.id} className="p-5 bg-white/60 rounded-3xl border border-white/20 shadow-sm flex justify-between items-center group hover:bg-white/80 transition-all">
                     <div>
-                      <p className="text-sm font-bold text-slate-700">{task.title}</p>
-                      <p className="text-[10px] text-slate-400 font-medium uppercase mt-1 flex items-center gap-1">
-                        <Calendar size={10} /> {task.deadline || 'No Deadline'}
+                      <p className="text-md font-bold text-slate-700">{task.title}</p>
+                      <p className="text-xs text-slate-400 font-medium mt-1 flex items-center gap-1">
+                        <Calendar size={12} /> {task.deadline || 'No Deadline'}
                       </p>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${
-                      task.priority === 'High' ? 'bg-rose-100 text-rose-600' : 
-                      task.priority === 'Medium' ? 'bg-indigo-100 text-indigo-600' : 'bg-emerald-100 text-emerald-600'
-                    }`}>
+                    <span className="bg-rose-100 text-rose-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">
                       {task.priority}
                     </span>
                   </div>
@@ -149,19 +123,30 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* GEMINI BOX */}
-            <div className="bg-[#072c3f] p-10 rounded-[3rem] shadow-2xl text-white flex flex-col">
-              <div className="flex items-center gap-2 mb-6">
+            {/* GEMINI AUDIT BOX (Spans 1 column) */}
+            <div className="bg-[#072c3f] p-10 rounded-[3rem] shadow-2xl text-white flex flex-col min-h-[450px]">
+              <div className="flex items-center gap-2 mb-6 shrink-0">
                 <Sparkles className="text-indigo-400" size={20} />
                 <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
-                <Markdown>{weekSummary}</Markdown>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto pr-2">
+                <div className="prose prose-invert prose-sm max-w-none 
+                  [&>p]:text-slate-300 [&>p]:leading-relaxed [&>p]:mb-4
+                  [&>h3]:text-indigo-300 [&>h3]:text-lg [&>h3]:font-bold [&>h3]:mb-2 [&>h3]:mt-4
+                  [&>ul]:list-disc [&>ul]:ml-4 [&>ul]:mb-4 [&>ul]:text-slate-300
+                  [&>strong]:text-white [&>strong]:font-bold
+                ">
+                  <Markdown>{weekSummary}</Markdown>
+                </div>
               </div> 
             </div>
-          </div>
+            
+          </div> {/* End of grid */}
         </section>
       </div>
 
-      {/* WEEKLY AUDIT */}
+      {/* MODAL: WEEKLY AUDIT */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
@@ -172,13 +157,12 @@ export default function Dashboard() {
             </div>
             <div className="flex-1 overflow-y-auto p-8 h-64">
               <StressChart />
-              <p className="mt-10 text-center text-slate-400 italic">Audit history visualization</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* ADD TASK */}
+      {/* MODAL: ADD TASK */}
       {isAddTaskOpen && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-6">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md" onClick={() => setIsAddTaskOpen(false)} />
@@ -188,14 +172,14 @@ export default function Dashboard() {
               <button onClick={() => setIsAddTaskOpen(false)}><X className="text-slate-400" /></button>
             </div>
             <div className="space-y-5">
-              <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl" placeholder="Task Name" />
-              <input type="date" value={newDeadline} onChange={(e) => setNewDeadline(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl" />
-              <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+              <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Task Name" />
+              <input type="date" value={newDeadline} onChange={(e) => setNewDeadline(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none" />
+              <select value={newPriority} onChange={(e) => setNewPriority(e.target.value)} className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none">
+                <option value="High">High Priority</option>
+                <option value="Medium">Medium Priority</option>
+                <option value="Low">Low Priority</option>
               </select>
-              <button onClick={addTask} className="w-full py-4 bg-[#072c3f] text-white rounded-2xl font-bold">Add to Ledger</button>
+              <button onClick={addTask} className="w-full py-4 bg-[#072c3f] text-white rounded-2xl font-bold hover:bg-slate-800 transition-all">Add to Ledger</button>
             </div>
           </div>
         </div>
