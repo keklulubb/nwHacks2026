@@ -91,7 +91,7 @@ The combination of fresh air and physical movement triggers a biological reset. 
         <div className="bg-[#072c3f] p-12 rounded-[3rem] shadow-2xl text-white flex flex-col text-left relative overflow-hidden">
           <div className="flex items-center gap-3 mb-8 relative z-10">
             <Sparkles className="text-indigo-400 animate-pulse" size={28} />
-            <h2 className="text-3xl font-bold font-display">Sympatico Recovery Audit</h2>
+            <h2 className="text-3xl font-bold font-display"> Recovery Audit</h2>
           </div>
 
           <div className="prose prose-invert max-w-none relative z-10 pb-20
