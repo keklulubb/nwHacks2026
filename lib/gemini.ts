@@ -149,7 +149,6 @@ export function formatDeltaString(tasks: Task[]) {
 }
 
 export async function lastWeekSummary(currentWeek: number) {
-
     if (currentWeek <= 0) {
         return "No insights from last week!";
     }
@@ -158,8 +157,8 @@ export async function lastWeekSummary(currentWeek: number) {
         return await weekSummaryNoComparison(currentWeek - 1);
     }
 
-    const lastWeek = seedWeeks[currentWeek-1];
-    const weekBeforeLast = seedWeeks[currentWeek-2];
+    const lastWeek = userTasks[currentWeek-1];
+    const weekBeforeLast = userTasks[currentWeek-2];
 
     if (lastWeek.length == 0) {
         return "No insights from last week!";
@@ -203,7 +202,7 @@ export async function lastWeekSummary(currentWeek: number) {
 }
 
 export async function weekSummaryNoComparison(weekIndex: number) {
-    const week = seedWeeks[weekIndex];
+    const week = userTasks[weekIndex];
     let diffString = formatDeltaString(week);
 
     const prompt = `You are given data on my activities over the week, as well as how they have impacted my stress. A larger negative number means I was more stressed afterwards, and a larger positive number indicates that it restored my energy. Identify major activities I have done last week and how they have impacted my overall stress levels and provide suggestions on how I can improve or keep up my momentum in the coming week. The data is included below: \n ${diffString}`;

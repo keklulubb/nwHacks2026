@@ -3,8 +3,41 @@ import LiquidBackground from "./week/liquidbackground";
 import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
 import { Plus, Sparkles } from "lucide-react";
+import {prioritizeTasks, suggestDeStress} from "@/lib/gemini";
+import {checkSetGlobals, setGlobals, Task} from "@/lib/seed";
+import Markdown from "react-markdown";
 
-export default function HomePage() {
+export default async function HomePage() {
+  checkSetGlobals();
+
+  if (tasksChanged || tasksPriority.length == 0) {
+      //filter for this week's unfinished tasks
+      const unfinishedTasks = userTasks[currentWeek].filter((t) => (!t.completed));
+
+      if (unfinishedTasks.length <= 3) {
+          tasksPriority = unfinishedTasks.map((t) => (
+              t.title
+          ));
+          if (tasksPriority.length > 0) {
+              tasksPriority.push("Not that many tasks, no need to prioritize! Keep pushing forwards!");
+          }
+      }
+      else {
+          console.log("regenerate gemini task priority");
+          tasksPriority = []; //for debug
+          if (process.env.DEBUG_MODE) {
+              tasksPriority = [unfinishedTasks[1]];
+          } else {
+              tasksPriority = await prioritizeTasks(unfinishedTasks);
+          }
+      }
+
+      tasksChanged = false;
+
+      if (tasksPriority.length === 0) {
+          tasksPriority.push("All tasks are finished!");
+      }
+  }
   return (
     <main className="relative min-h-screen w-full">
       <LiquidBackground />
@@ -39,22 +72,25 @@ export default function HomePage() {
           <div className="md:col-span-2 md:row-span-2 p-8 bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-white/40 shadow-xl">
             <h3 className="text-2xl font-bold text-slate-900 mb-6">Top Priority Tasks</h3>
             <div className="space-y-4">
-              {['Finish nwHacks project', 'Grocery Shopping', 'Call Mom'].map(task => (
+              {tasksPriority.slice(0, tasksPriority.length - 1).map(task => (
                 <div key={task} className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl border border-white/20">
                   <input type="checkbox" className="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500" />
                   <span className="font-medium text-slate-700">{task}</span>
                 </div>
 
               ))}
-              <div className="flex items-center gap-2 mb-6">
-                    <Sparkles className="text-indigo-400" size={20} />
+                <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="text-indigo-400" size={20}/>
                     <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
-                  </div>
+                    <div>
+                        <Markdown>{tasksPriority[tasksPriority.length - 1]}</Markdown>
+                    </div>
+                </div>
             </div>
           </div>
 
-          {/* Stress Trend (Wide Box) */}
-<div className="md:col-span-2 p-8 bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-white/40 shadow-xl flex flex-col">
+            {/* Stress Trend (Wide Box) */}
+            <div className="md:col-span-2 p-8 bg-white/40 backdrop-blur-xl rounded-[2.5rem] border border-white/40 shadow-xl flex flex-col">
   <h3 className="text-2xl font-bold text-slate-900 tracking-widest mb-4">
     Stress Trend
   </h3>
@@ -69,7 +105,7 @@ export default function HomePage() {
           <div className="md:col-span-2 p-8 bg-[#072c3f] text-white rounded-[2.5rem] shadow-2xl flex flex-col justify-between">
             <div>
               <h3 className="text-indigo-200 text-2xl font-bold mb-6 text-2xl tracking-widest">Weekly Stress Budget</h3>
-              <p className="text-4xl font-bold mt-2">60% <span className="text-lg font-normal opacity-80 text-indigo-100">Left</span></p>
+              <p className="text-4xl font-bold mt-2">{stressLevel}% <span className="text-lg font-normal opacity-80 text-indigo-100">Left</span></p>
             </div>
             <div className="w-full h-3 bg-indigo-900/30 rounded-full overflow-hidden">
               <div className="h-full bg-white rounded-full" style={{ width: '60%' }}></div>

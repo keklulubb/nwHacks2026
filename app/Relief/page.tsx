@@ -3,13 +3,21 @@ import Navbar from "@/components/Navbar";
 import { Sparkles } from "lucide-react";
 import {suggestDeStress} from "@/lib/gemini";
 import Markdown from 'react-markdown'
+import {checkSetGlobals} from "@/lib/seed";
 
 export default async function ReliefCenter() {
+
+  checkSetGlobals();
 
   if (stressChanged || reliefRecs.length === 0) {
       console.log("regenerate gemini relief recs");
       reliefRecs = []; //for debug
-      reliefRecs = await suggestDeStress(stressLevel);
+      if (process.env.DEBUG_MODE) {
+          reliefRecs = ["a", "b", "c", "d"];
+      }
+      else {
+          reliefRecs = await suggestDeStress(stressLevel);
+      }
       stressChanged = false;
   }
   return (

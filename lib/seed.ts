@@ -8,9 +8,46 @@ export type Task = {
   completedDate: number; //0 = not complete. otherwise, Monday to Sunday 1-7
 };
 
-globalThis.stressChanged = true;
-globalThis.stressLevel = 100;
-globalThis.reliefRecs = [];
+export function checkSetGlobals() {
+    if (typeof stressChanged === 'undefined') {
+        console.log("go");
+        setGlobals();
+    }
+}
+
+export function setGlobals() {
+    globalThis.stressChanged = true; //all flags set to TRUE so they generate new content on startup
+    globalThis.stressLevel = 100;
+    globalThis.reliefRecs = [];
+    globalThis.tasksChanged = true;
+    globalThis.tasksPriority = [];
+    globalThis.userTasks = [
+        [
+            { id: "1", title: "Math homework", stressBefore: 100, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
+            { id: "2", title: "Group project meeting", stressBefore: 80, stressAfter: 70, deadline: 5, completed: true, completedDate: 2 },
+            { id: "3", title: "Work out", stressBefore: 70, stressAfter: 85, deadline: 5, completed: true, completedDate: 2 },
+            { id: "4", title: "English essay draft", stressBefore: 85, stressAfter: 55, deadline: 3, completed: true, completedDate: 1 },
+            { id: "6", title: "Reply to emails", stressBefore: 55, stressAfter: 45, deadline: 5, completed: true, completedDate: 1 },
+            { id: "7", title: "Clean room", stressBefore: 45, stressAfter: 50, deadline: 5, completed: true, completedDate: 1 },
+        ],
+        [
+            { id: "9", title: "Math homework", stressBefore: 80, stressAfter: 65, deadline: 5, completed: true, completedDate: 1 },
+            { id: "10", title: "Study", stressBefore: 65, stressAfter: 60, deadline: 5, completed: true, completedDate: 1 },
+            { id: "11", title: "Hang out with friends", stressBefore: 60, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
+            { id: "12", title: "Study", stressBefore: 80, stressAfter: 83, deadline: 5, completed: true, completedDate: 1 },
+            { id: "13", title: "Physics exam", stressBefore: 83, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
+            { id: "14", title: "Go on a walk", stressBefore: 43, stressAfter: 53, deadline: 5, completed: true, completedDate: 1 },
+            { id: "15", title: "Part-time job", stressBefore: 53, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
+            { id: "16", title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: 5, completed: true, completedDate: 1 },
+        ],
+        [
+            //
+        ],
+    ];
+    globalThis.currentWeek = 2;
+    globalThis.weekChanged = true;
+    globalThis.weekSummary = "";
+}
 
 export function taskDateToDayOfWeek(task: Task) {
     const strings = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -21,9 +58,10 @@ export function taskDateToDayOfWeek(task: Task) {
     }
     return "";
 }
-
 export function taskStressChanges(tasks: Task[]) {
-    return tasks.map((t) => ({
+    return tasks.filter((t) => (
+        t.completed
+    )).map((t) => ({
         ...t,
         delta: t.stressAfter - t.stressBefore,
     }));
