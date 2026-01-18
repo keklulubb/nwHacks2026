@@ -108,7 +108,7 @@ export default async function HomePage() {
               <p className="text-4xl font-bold mt-2">{stressLevel}% <span className="text-lg font-normal opacity-80 text-indigo-100">Left</span></p>
             </div>
             <div className="w-full h-3 bg-indigo-900/30 rounded-full overflow-hidden">
-              <div className="h-full bg-white rounded-full" style={{ width: '60%' }}></div>
+              <div className="h-full bg-white rounded-full" style={{ width: `${stressLevel}%` }}></div>
             </div>
           </div>
 

@@ -6,6 +6,7 @@ declare global {
     var tasksPriority: string[];
     var userTasks: Task[][];
     var currentWeek: number;
+    var currentDay: number;
     var weekChanged: Boolean;
     var weekSummary: string;
 }

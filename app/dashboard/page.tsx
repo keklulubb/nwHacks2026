@@ -4,7 +4,7 @@ import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
 import Markdown from "react-markdown";
-import {checkSetGlobals} from "@/lib/seed";
+import {checkSetGlobals, Task} from "@/lib/seed";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +19,8 @@ export default function Dashboard() {
     { id: 2, name: 'Bug Fix #42', deadline: '2024-01-22', priority: 'Medium' },
   ]);
 
+  //const [tasks, setTasks] = useState(userTasks[currentWeek]);
+
   // Form States
   const [newName, setNewName] = useState('');
   const [newDeadline, setNewDeadline] = useState('');
@@ -31,7 +33,8 @@ export default function Dashboard() {
       id: Date.now(),
       name: newName,
       deadline: newDeadline,
-      priority: newPriority
+      priority: newPriority,
+      stressBefore: 90, stressAfter: 75, completed: true, completedDate: 1
     };
     setTasks([...tasks, newTask]);
     setNewName('');
