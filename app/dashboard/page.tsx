@@ -77,7 +77,7 @@ export default function Dashboard() {
           <div className="flex justify-between items-end mb-8">
             <div>
               <h1 className="text-4xl font-bold font-display text-slate-900">Task Ledger</h1>
-              <p className="text-slate-500 font-medium">Assign tasks to your weekly budget.</p>
+              <p className="text-slate-900 text-xl">Assign tasks to your weekly budget.</p>
             </div>
             <button 
               onClick={() => setIsAddTaskOpen(true)}

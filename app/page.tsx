@@ -69,7 +69,8 @@ export default function HomePage() {
           <h1 className="text-8xl font-normal leading-tight font-logo">
             <span className="text-[#c25f4e]">Stressy</span> <span className="text-[#072c3f]">Baka</span>
           </h1>
-          <p className="text-2xl text-slate-700 font-medium leading-relaxed italic">The energy accountant for your nervous system.</p>
+          <p className="text-2xl text-[#ebebeb] font-medium leading-relaxed italic">The energy accountant for your nervous system.</p>
+          <p className="text-xl text-[#ebebeb]">The first ledger for your nervous system. Track energy, not just time. Log stress before and after tasks and get a weekly reflection on what drains you (and what helps).</p>
           <div className="flex flex-wrap gap-4 pt-4">
             <a href="#log" className="px-10 py-4 bg-[#072c3f] text-white rounded-full font-bold shadow-xl hover:scale-105 transition-all">Try Demo</a>
             <a href="#insights" className="px-10 py-4 bg-white/70 backdrop-blur-md text-slate-700 rounded-full font-bold border border-white/50 shadow-sm hover:bg-white transition-all">Weekly Insights</a>
@@ -81,7 +82,7 @@ export default function HomePage() {
       <section id="log" className="relative z-10 max-w-7xl mx-auto px-6 py-24 scroll-mt-20">
         <div className="flex justify-between items-end mb-12">
           <h2 className="text-4xl font-bold font-display text-slate-900 italic">Task Ledger</h2>
-          <button onClick={() => setIsAddTaskOpen(true)} className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100">+ New Stressor</button>
+          <button onClick={() => setIsAddTaskOpen(true)} className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-600">+ New Task</button>
         </div>
         <div className="flex overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide gap-6">
           <div className="flex gap-6 min-w-[2500px]">
@@ -144,14 +145,14 @@ export default function HomePage() {
       <section id="relief" className="relative z-10 max-w-7xl mx-auto px-6 py-24 scroll-mt-20">
         <div className="text-center mb-16">
           <h2 className="text-6xl font-bold text-slate-900 font-display italic mb-4">Relief Center</h2>
-          <p className="text-slate-600 text-lg">Instant Para-effect Activation.</p>
+          <p className="text-[#ebebeb] text-lg">Instant Para-effect Activation.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="bg-white/50 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/50 shadow-xl flex flex-col items-center">
             <span className="text-5xl mb-4"><svg viewBox="0 0 24 24" className="w-[1em] h-[1em]" fill="#1DB954"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.306c-.215.352-.676.463-1.028.249-2.82-1.722-6.368-2.111-10.547-1.157-.402.092-.803-.16-.895-.562-.092-.403.159-.803.562-.896 4.582-1.05 8.51-.595 11.659 1.328.352.215.463.676.249 1.038zm1.468-3.26c-.272.441-.847.58-1.288.308-3.23-1.984-8.153-2.558-11.972-1.398-.496.15-1.023-.13-1.173-.626-.15-.496.13-1.023.626-1.173 4.364-1.324 9.791-.684 13.518 1.597.441.272.58.847.289 1.291zm.139-3.39c-3.873-2.3-10.264-2.512-13.974-1.387-.595.18-1.226-.154-1.406-.75-.18-.595.154-1.226.75-1.406 4.267-1.296 11.325-1.047 15.772 1.594.536.318.712 1.01.394 1.546-.318.536-1.01.712-1.546.403z"/></svg></span>
             <h3 className="text-xl font-bold mb-4 font-display">Audio Therapy</h3>
-            <button className="w-full py-4 bg-[#1DB954] text-white rounded-2xl font-bold">Open Spotify</button>
+            <a href="https://open.spotify.com/playlist/37i9dQZF1DX2TRYkJECvfC?si=bbd1f3f6a5b04f6e" className="w-full py-4 bg-[#1DB954] text-white rounded-2xl font-bold block text-center">Open Spotify</a>
           </div>
           <div className="bg-white/50 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/50 shadow-xl flex flex-col items-center">
             <span className="text-5xl mb-4"><svg viewBox="0 0 24 24" className="w-[1em] h-[1em]" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>

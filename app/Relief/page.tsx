@@ -60,7 +60,8 @@ The combination of fresh air and physical movement triggers a biological reset. 
               </svg>
             </span>
             <h3 className="text-slate-900 text-lg font-bold">Indie Folk Playlist</h3>
-            <button className="mt-4 w-full py-3 bg-[#1DB954] text-white rounded-xl font-bold text-sm">Open Spotify</button>
+            
+            <a href="https://open.spotify.com/playlist/0rIIdmkxGY6aNR87qhDOjX" className="w-full py-4 bg-[#1DB954] text-white rounded-2xl font-bold block text-center">Open Spotify</a>
           </div>
 
           {/* CARD 2: YOUTUBE */}
