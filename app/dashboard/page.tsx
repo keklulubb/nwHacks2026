@@ -26,24 +26,30 @@ export default function Dashboard() {
 
 
 
-            {/* Day Boxes */}
-            <div className="flex-1 overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide">
-              <div className="flex gap-4 min-w-[1200px]">
-                {days.map((day) => (
-                  <div key={day} className="w-56 flex flex-col bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-white/40 p-5 h-[450px]">
-                    <span className="text-sm font-black text-slate-400 uppercase tracking-tighter mb-4">{day}</span>
-                    
-                    {/* The "Drop Zone" */}
-                    <div className="flex-1 rounded-3xl border-2 border-dashed border-white/40 flex flex-col items-center justify-center gap-2 text-white/40 group hover:border-indigo-300 hover:bg-white/20 transition-all">
-                      <Plus size={24} className="group-hover:scale-125 transition-transform" />
-                      <span className="text-[10px] font-bold uppercase">Budget Task</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          
-        </section>
+            {/* THE 7-DAY HORIZONTAL SCROLL */}
+<div className="flex-1 overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide">
+  
+  <div className="flex gap-6 min-w-[2500px]"> 
+    {days.map((day) => (
+      <div 
+        key={day} 
+        
+        className="w-[350px] flex-shrink-0 flex flex-col bg-white/40 backdrop-blur-md rounded-[2.5rem] border border-white/40 p-6 h-[450px] transition-all hover:bg-white/50"
+      >
+        <span className="text-sm font-black text-slate-400 uppercase tracking-tighter mb-4">
+          {day}
+        </span>
+        
+        {/* The "Drop Zone" */}
+        <div className="flex-1 rounded-3xl border-2 border-dashed border-white/40 flex flex-col items-center justify-center gap-2 text-white/40 group hover:border-indigo-300 hover:bg-white/20 transition-all">
+          <Plus size={24} className="group-hover:scale-125 transition-transform" />
+          <span className="text-[10px] font-bold uppercase">Budget Task</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+</section>
 
         {/* Last week's insights") */}
         <section id="insights" className="scroll-mt-32 pt-10">
