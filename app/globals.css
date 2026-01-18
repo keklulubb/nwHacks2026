@@ -1,47 +1,39 @@
 @import "tailwindcss";
 
-/* Ensure the main content doesn't have a background */
-body {
-  background-color: #93d6f1;
-  margin: 0;
-  font-family: var(--font-inter), system-ui, sans-serif !important;
-}
-/* Enable scrolling */
-html {
-  scroll-behavior: smooth !important;
-}
-
-h1, h2, h3, h4, .font-display {
-  font-family: var(--font-manrope), system-ui, sans-serif !important;
-  font-weight: 800; /* Makes Manrope look better */
-}
-
 @theme {
-
   --font-sans: var(--font-inter);
   --font-display: var(--font-manrope);
+  --font-logo: var(--font-oleo);
 
   --animate-liquid-slow: liquid 25s infinite;
   --animate-liquid-medium: liquid 18s infinite reverse;
   --animate-liquid-fast: liquid 12s infinite;
-
-
-
-  @keyframes liquid {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(10vw, 15vh) scale(1.2);
-    }
-    66% {
-      transform: translate(-5vw, 10vh) scale(0.8);
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-  }
 }
 
+/* 1. KEYFRAMES MUST BE TOP-LEVEL */
+@keyframes liquid {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(10vw, 15vh) scale(1.2); }
+  66% { transform: translate(-5vw, 10vh) scale(0.8); }
+  100% { transform: translate(0, 0) scale(1); }
+}
 
+/* 2. GLOBAL DEFAULTS */
+html {
+  scroll-behavior: smooth !important;
+}
 
+body {
+  margin: 0;
+  background-color: transparent !important; /* CRUCIAL: lets the liquid show */
+  font-family: var(--font-inter), sans-serif !important;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-manrope), sans-serif !important;
+  font-weight: 800;
+}
+
+.font-logo {
+  font-family: var(--font-oleo), cursive !important;
+}
