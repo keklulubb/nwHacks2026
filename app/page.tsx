@@ -2,6 +2,7 @@ import Link from "next/link";
 import LiquidBackground from "./week/liquidbackground";
 import Navbar from "@/components/Navbar";
 import StressChart from "@/components/StressChart";
+import { Plus, Sparkles } from "lucide-react";
 
 
 
@@ -45,7 +46,12 @@ export default function HomePage() {
                   <input type="checkbox" className="w-5 h-5 rounded-md border-slate-300 text-indigo-600 focus:ring-indigo-500" />
                   <span className="font-medium text-slate-700">{task}</span>
                 </div>
+                
               ))}
+              <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="text-indigo-400" size={20} />
+                    <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
+                  </div>
             </div>
           </div>
 
@@ -55,7 +61,7 @@ export default function HomePage() {
     Stress Trend
   </h3>
   
-  {/* The Chart Container - We give it a specific height so Recharts can find its space */}
+  {/* The Chart Container*/}
   <div className="w-full h-[180px]">
     <StressChart />
   </div>

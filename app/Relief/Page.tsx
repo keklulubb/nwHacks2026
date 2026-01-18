@@ -1,11 +1,12 @@
 import LiquidBackground from "../week/liquidbackground";
 import Navbar from "@/components/Navbar";
+import { Sparkles } from "lucide-react";
+
 
 export default function ReliefCenter() {
   return (
     <main className="relative min-h-screen pt-32 px-6">
       <LiquidBackground />
-      {/* Ensure Navbar is here if not in your layout */}
       <Navbar />
 
       <div className="max-w-6xl mx-auto text-center relative z-10">
@@ -39,8 +40,8 @@ export default function ReliefCenter() {
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </span>
-            <h3 className="text-slate-900 mt-2 textxl font-bold leading-relaxed">
-              Visual breathing exercises designed to slow your heart rate and center your focus.
+            <h3 className="text-slate-900 mt-2 text-sm font-bold leading-relaxed">
+              Breathing exercises designed to slow your heart rate and center your focus.
             </h3>
             <button className="mt-auto w-full py-4 bg-[#FF0000] text-white rounded-2xl font-bold shadow-lg shadow-red-200/50 hover:scale-[1.02] transition-transform">
               Watch on YouTube
@@ -61,6 +62,15 @@ export default function ReliefCenter() {
               Read in Books
             </button>
           </div>
+        
+
+         <div className="bg-white/50 backdrop-blur-xl md:col-span-3 p-30 rounded-[2.5rem] border border-white/50 shadow-xl hover:-translate-y-2 transition-all flex flex-col items-center">
+            <span className="text-5xl inline-flex items-center mb-4"></span>
+          <div className="flex items-center gap-2 mb-6">
+                    <Sparkles className="text-indigo-400" size={20} />
+                    <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
+            </div>
+            </div> 
 
         </div>
       </div>
