@@ -1,9 +1,17 @@
 import LiquidBackground from "../week/liquidbackground";
 import Navbar from "@/components/Navbar";
 import { Sparkles } from "lucide-react";
+import {suggestDeStress} from "@/lib/gemini";
+import Markdown from 'react-markdown'
 
+export default async function ReliefCenter() {
 
-export default function ReliefCenter() {
+  if (stressChanged || reliefRecs.length === 0) {
+      console.log("regenerate gemini relief recs");
+      reliefRecs = []; //for debug
+      reliefRecs = await suggestDeStress(stressLevel);
+      stressChanged = false;
+  }
   return (
     <main className="relative min-h-screen pt-32 px-6">
       <LiquidBackground />
@@ -27,7 +35,7 @@ export default function ReliefCenter() {
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.306c-.215.352-.676.463-1.028.249-2.82-1.722-6.368-2.111-10.547-1.157-.402.092-.803-.16-.895-.562-.092-.403.159-.803.562-.896 4.582-1.05 8.51-.595 11.659 1.328.352.215.463.676.249 1.038zm1.468-3.26c-.272.441-.847.58-1.288.308-3.23-1.984-8.153-2.558-11.972-1.398-.496.15-1.023-.13-1.173-.626-.15-.496.13-1.023.626-1.173 4.364-1.324 9.791-.684 13.518 1.597.441.272.58.847.289 1.291zm.139-3.39c-3.873-2.3-10.264-2.512-13.974-1.387-.595.18-1.226-.154-1.406-.75-.18-.595.154-1.226.75-1.406 4.267-1.296 11.325-1.047 15.772 1.594.536.318.712 1.01.394 1.546-.318.536-1.01.712-1.546.403z"/>
               </svg>
             </span>
-            <h3 className="text-slate-900 mt-2 textxl font-bold leading-relaxed">A playlist of classical pieces to lower cortisol levels.</h3>
+            <h3 className="text-slate-900 mt-2 textxl font-bold leading-relaxed">A playlist of {reliefRecs[0]} to lower cortisol levels.</h3>
             <button className="mt-auto w-full py-4 bg-[#1DB954] text-white rounded-2xl font-bold shadow-lg shadow-emerald-200/50 hover:scale-[1.02] transition-transform">
               Stream in Spotify
             </button>
@@ -41,7 +49,7 @@ export default function ReliefCenter() {
               </svg>
             </span>
             <h3 className="text-slate-900 mt-2 text-sm font-bold leading-relaxed">
-              Breathing exercises designed to slow your heart rate and center your focus.
+                {reliefRecs[1]} designed to center your focus.
             </h3>
             <button className="mt-auto w-full py-4 bg-[#FF0000] text-white rounded-2xl font-bold shadow-lg shadow-red-200/50 hover:scale-[1.02] transition-transform">
               Watch on YouTube
@@ -70,7 +78,7 @@ export default function ReliefCenter() {
     
         
         <h3 className="text-sm font-bold text-slate-900 font-display">
-            Low-intensity physical movement designed to lower cortisol and reset your heart rate.
+            {reliefRecs[2]} designed to reset your heart rate.
         </h3>
         
         <button className="mt-auto w-full py-4 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-200/50 hover:scale-[1.02] transition-transform">
@@ -84,6 +92,9 @@ export default function ReliefCenter() {
           <div className="flex items-center gap-2 mb-6">
                     <Sparkles className="text-indigo-400" size={20} />
                     <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
+                    <div>
+                        <Markdown>{reliefRecs[3]}</Markdown>
+                    </div>
             </div>
             </div> 
 

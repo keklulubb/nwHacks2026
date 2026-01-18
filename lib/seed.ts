@@ -8,6 +8,10 @@ export type Task = {
   completedDate: number; //0 = not complete. otherwise, Monday to Sunday 1-7
 };
 
+globalThis.stressChanged = true;
+globalThis.stressLevel = 100;
+globalThis.reliefRecs = [];
+
 export function taskDateToDayOfWeek(task: Task) {
     const strings = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     if (task.completed) {
