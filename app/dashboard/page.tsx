@@ -4,7 +4,7 @@ import LiquidBackground from "../week/liquidbackground";
 import StressChart from "@/components/StressChart";
 import { X, Plus, Sparkles, Brain, Calendar, AlertCircle } from "lucide-react";
 import Markdown from "react-markdown";
-import {checkSetGlobals, Task} from "@/lib/seed";
+import {checkSetGlobals, getUnfinishedTasks, Task} from "@/lib/seed";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,12 +14,12 @@ export default function Dashboard() {
   checkSetGlobals();
 
   // Task List State
-  const [tasks, setTasks] = useState([
-    { id: 1, name: 'Midterm Prep', deadline: '2024-01-20', priority: 'High' },
-    { id: 2, name: 'Bug Fix #42', deadline: '2024-01-22', priority: 'Medium' },
-  ]);
+  //const [tasks, setTasks] = useState([
+    //{ id: 1, name: 'Midterm Prep', deadline: '2024-01-20', priority: 'High' },
+    //{ id: 2, name: 'Bug Fix #42', deadline: '2024-01-22', priority: 'Medium' },
+  //]);
 
-  //const [tasks, setTasks] = useState(userTasks[currentWeek]);
+  const [tasks, setTasks] = useState(getUnfinishedTasks());
 
   // Form States
   const [newName, setNewName] = useState('');
@@ -41,6 +41,10 @@ export default function Dashboard() {
     setNewDeadline('');
     setNewPriority('Medium');
     setIsAddTaskOpen(false);
+  };
+
+  const markTaskComplete = () => {
+      //
   };
 
   return (
@@ -99,7 +103,7 @@ export default function Dashboard() {
                 {tasks.map((task) => (
                   <div key={task.id} className="p-4 bg-white/60 rounded-2xl border border-white/20 shadow-sm flex justify-between items-center group hover:bg-white/80 transition-all">
                     <div>
-                      <p className="text-sm font-bold text-slate-700">{task.name}</p>
+                      <p className="text-sm font-bold text-slate-700">{task.title}</p>
                       <p className="text-[10px] text-slate-400 font-medium uppercase mt-1 flex items-center gap-1">
                         <Calendar size={10} /> {task.deadline || 'No Deadline'}
                       </p>

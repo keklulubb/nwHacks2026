@@ -3,9 +3,10 @@ export type Task = {
   title: string;
   stressBefore: number; // 0 - 100, 100 being the least stress
   stressAfter: number;  // 0 - 100
-  deadline: number;
+  deadline: string;
   completed: boolean;
   completedDate: number; //0 = not complete. otherwise, Monday to Sunday 1-7
+  priority?: string;
 };
 
 export function checkSetGlobals() {
@@ -23,31 +24,31 @@ export function setGlobals() {
     globalThis.tasksPriority = [];
     globalThis.userTasks = [
         [
-            { id: 1, title: "Math homework", stressBefore: 100, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
-            { id: 2, title: "Group project meeting", stressBefore: 80, stressAfter: 70, deadline: 5, completed: true, completedDate: 2 },
-            { id: 3, title: "Work out", stressBefore: 70, stressAfter: 85, deadline: 5, completed: true, completedDate: 2 },
-            { id: 4, title: "English essay draft", stressBefore: 85, stressAfter: 55, deadline: 3, completed: true, completedDate: 1 },
-            { id: 6, title: "Reply to emails", stressBefore: 55, stressAfter: 45, deadline: 5, completed: true, completedDate: 1 },
-            { id: 7, title: "Clean room", stressBefore: 45, stressAfter: 50, deadline: 5, completed: true, completedDate: 1 },
+            { id: 1, title: "Math homework", stressBefore: 100, stressAfter: 80, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 2, title: "Group project meeting", stressBefore: 80, stressAfter: 70, deadline: '2024-01-20', completed: true, completedDate: 2 },
+            { id: 3, title: "Work out", stressBefore: 70, stressAfter: 85, deadline: '2024-01-20', completed: true, completedDate: 2 },
+            { id: 4, title: "English essay draft", stressBefore: 85, stressAfter: 55, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 6, title: "Reply to emails", stressBefore: 55, stressAfter: 45, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 7, title: "Clean room", stressBefore: 45, stressAfter: 50, deadline: '2024-01-20', completed: true, completedDate: 1 },
         ],
         [
-            { id: 9, title: "Math homework", stressBefore: 80, stressAfter: 65, deadline: 5, completed: true, completedDate: 1 },
-            { id: 10, title: "Study", stressBefore: 65, stressAfter: 60, deadline: 5, completed: true, completedDate: 1 },
-            { id: 11, title: "Hang out with friends", stressBefore: 60, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
-            { id: 12, title: "Study", stressBefore: 80, stressAfter: 83, deadline: 5, completed: true, completedDate: 1 },
-            { id: 13, title: "Physics exam", stressBefore: 83, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
-            { id: 14, title: "Go on a walk", stressBefore: 43, stressAfter: 53, deadline: 5, completed: true, completedDate: 1 },
-            { id: 15, title: "Part-time job", stressBefore: 53, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
-            { id: 16, title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: 5, completed: true, completedDate: 1 },
+            { id: 9, title: "Math homework", stressBefore: 80, stressAfter: 65, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 10, title: "Study", stressBefore: 65, stressAfter: 60, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 11, title: "Hang out with friends", stressBefore: 60, stressAfter: 80, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 12, title: "Study", stressBefore: 80, stressAfter: 83, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 13, title: "Physics exam", stressBefore: 83, stressAfter: 43, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 14, title: "Go on a walk", stressBefore: 43, stressAfter: 53, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 15, title: "Part-time job", stressBefore: 53, stressAfter: 43, deadline: '2024-01-20', completed: true, completedDate: 1 },
+            { id: 16, title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: '2024-01-20', completed: true, completedDate: 1 },
         ],
         [
-            { id: 17, title: "Math homework", stressBefore: 90, stressAfter: 75, deadline: 5, completed: true, completedDate: 1 },
-            { id: 18, title: "Group Project", stressBefore: 75, stressAfter: 50, deadline: 5, completed: true, completedDate: 2 },
-            { id: 19, title: "Work out", stressBefore: 50, stressAfter: 60, deadline: 5, completed: true, completedDate: 2 },
-            { id: 20, title: "Listen to music", stressBefore: 60, stressAfter: 70, deadline: 5, completed: true, completedDate: 3 },
-            { id: 21, title: "Reply to emails", stressBefore: 70, stressAfter: 65, deadline: 5, completed: true, completedDate: 3 },
-            { id: 22, title: "Finish presentation slides", stressBefore: 65, stressAfter: 65, deadline: 5, completed: false, completedDate: 0 },
-            { id: 23, title: "Online meeting", stressBefore: 50, stressAfter: 65, deadline: 65, completed: false, completedDate: 0 },
+            { id: 17, title: "Math homework", stressBefore: 90, stressAfter: 75, deadline: '2024-01-20', completed: true, completedDate: 1, priority: 'Medium' },
+            { id: 18, title: "Group Project", stressBefore: 75, stressAfter: 50, deadline: '2024-01-20', completed: true, completedDate: 2, priority: 'High' },
+            { id: 19, title: "Work out", stressBefore: 50, stressAfter: 60, deadline: '2024-01-20', completed: true, completedDate: 2, priority: 'Medium' },
+            { id: 20, title: "Listen to music", stressBefore: 60, stressAfter: 70, deadline: '2024-01-20', completed: true, completedDate: 3, priority: 'Medium' },
+            { id: 21, title: "Reply to emails", stressBefore: 70, stressAfter: 65, deadline: '2024-01-20', completed: true, completedDate: 3, priority: 'Low' },
+            { id: 22, title: "Finish presentation slides", stressBefore: 65, stressAfter: 65, deadline: '2024-01-20', completed: false, completedDate: 0, priority: 'High' },
+            { id: 23, title: "Online meeting", stressBefore: 65, stressAfter: 65, deadline: '2024-01-20', completed: false, completedDate: 0, priority: 'High' },
         ],
     ];
     globalThis.currentWeek = 2;
@@ -104,6 +105,14 @@ export function setGlobals() {
         "*   *Action:* Keep the \"Hang out with friends\" (+20) in the schedule for this weekend. You need that high-value social charge to ensure you don't burn out post-exam.";
 }
 
+export function getUnfinishedTasks() {
+    const weeklyTasks = userTasks[currentWeek];
+
+    return weeklyTasks.filter((task) => {
+        return !task.completed
+    });
+}
+
 export function taskDateToDayOfWeek(task: Task) {
     const strings = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     if (task.completed) {
@@ -123,34 +132,34 @@ export function taskStressChanges(tasks: Task[]) {
 }
 
 export const seedTasks: Task[] = [
-  { id: 1, title: "Math homework", stressBefore: 4, stressAfter: 5, deadline: 5, completed: true, completedDate: 1 },
-  { id: 2, title: "English essay draft", stressBefore: 3, stressAfter: 4, deadline: 8, completed: false, completedDate: 1 },
-  { id: 3, title: "Group project meeting", stressBefore: 4, stressAfter: 3, deadline: 5, completed: true, completedDate: 1 },
-  { id: 4, title: "Workout / walk", stressBefore: 3, stressAfter: 2, deadline: 6, completed: true, completedDate: 1 },
-  { id: 5, title: "Clean room", stressBefore: 2, stressAfter: 1, deadline: 5, completed: true, completedDate: 1 },
-  { id: 6, title: "Reply to emails/messages", stressBefore: 3, stressAfter: 4, deadline: 5, completed: false, completedDate: 1 },
+  { id: 1, title: "Math homework", stressBefore: 4, stressAfter: 5, deadline: '2024-01-20', completed: true, completedDate: 1 },
+  { id: 2, title: "English essay draft", stressBefore: 3, stressAfter: 4, deadline: '2024-01-20', completed: false, completedDate: 1 },
+  { id: 3, title: "Group project meeting", stressBefore: 4, stressAfter: 3, deadline: '2024-01-20', completed: true, completedDate: 1 },
+  { id: 4, title: "Workout / walk", stressBefore: 3, stressAfter: 2, deadline: '2024-01-20', completed: true, completedDate: 1 },
+  { id: 5, title: "Clean room", stressBefore: 2, stressAfter: 1, deadline: '2024-01-20', completed: true, completedDate: 1 },
+  { id: 6, title: "Reply to emails/messages", stressBefore: 3, stressAfter: 4, deadline: '2024-01-20', completed: false, completedDate: 1 },
 ];
 
 export const currentWeekIndex: number = 2;
 
 export const seedWeeks: Task[][] = [
     [
-        { id: 1, title: "Math homework", stressBefore: 100, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
-        { id: 2, title: "Group project meeting", stressBefore: 80, stressAfter: 70, deadline: 5, completed: true, completedDate: 2 },
-        { id: 3, title: "Work out", stressBefore: 70, stressAfter: 85, deadline: 5, completed: true, completedDate: 2 },
-        { id: 4, title: "English essay draft", stressBefore: 85, stressAfter: 55, deadline: 3, completed: true, completedDate: 1 },
-        { id: 6, title: "Reply to emails", stressBefore: 55, stressAfter: 45, deadline: 5, completed: true, completedDate: 1 },
-        { id: 7, title: "Clean room", stressBefore: 45, stressAfter: 50, deadline: 5, completed: true, completedDate: 1 },
+        { id: 1, title: "Math homework", stressBefore: 100, stressAfter: 80, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 2, title: "Group project meeting", stressBefore: 80, stressAfter: 70, deadline: '2024-01-20', completed: true, completedDate: 2 },
+        { id: 3, title: "Work out", stressBefore: 70, stressAfter: 85, deadline: '2024-01-20', completed: true, completedDate: 2 },
+        { id: 4, title: "English essay draft", stressBefore: 85, stressAfter: 55, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 6, title: "Reply to emails", stressBefore: 55, stressAfter: 45, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 7, title: "Clean room", stressBefore: 45, stressAfter: 50, deadline: '2024-01-20', completed: true, completedDate: 1 },
     ],
     [
-        { id: 9, title: "Math homework", stressBefore: 80, stressAfter: 65, deadline: 5, completed: true, completedDate: 1 },
-        { id: 10, title: "Study", stressBefore: 65, stressAfter: 60, deadline: 5, completed: true, completedDate: 1 },
-        { id: 11, title: "Hang out with friends", stressBefore: 60, stressAfter: 80, deadline: 5, completed: true, completedDate: 1 },
-        { id: 12, title: "Study", stressBefore: 80, stressAfter: 83, deadline: 5, completed: true, completedDate: 1 },
-        { id: 13, title: "Physics exam", stressBefore: 83, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
-        { id: 14, title: "Go on a walk", stressBefore: 43, stressAfter: 53, deadline: 5, completed: true, completedDate: 1 },
-        { id: 15, title: "Part-time job", stressBefore: 53, stressAfter: 43, deadline: 5, completed: true, completedDate: 1 },
-        { id: 16, title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: 5, completed: true, completedDate: 1 },
+        { id: 9, title: "Math homework", stressBefore: 80, stressAfter: 65, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 10, title: "Study", stressBefore: 65, stressAfter: 60, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 11, title: "Hang out with friends", stressBefore: 60, stressAfter: 80, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 12, title: "Study", stressBefore: 80, stressAfter: 83, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 13, title: "Physics exam", stressBefore: 83, stressAfter: 43, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 14, title: "Go on a walk", stressBefore: 43, stressAfter: 53, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 15, title: "Part-time job", stressBefore: 53, stressAfter: 43, deadline: '2024-01-20', completed: true, completedDate: 1 },
+        { id: 16, title: "Visit a new cafe", stressBefore: 43, stressAfter: 58, deadline: '2024-01-20', completed: true, completedDate: 1 },
     ],
     [
         //
