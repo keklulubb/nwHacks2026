@@ -1,3 +1,16 @@
+import { currentWeekIndex, seedWeeks } from "@/lib/seed";
+
+
+export function GetUnfinishedTasks() {
+    const weeklyTasks = seedWeeks[currentWeekIndex];
+
+    return (
+        weeklyTasks.filter((task) => {
+        !task.completed
+    }))
+}
+
+
 export default function LogPage() {
   return (
     <div className="space-y-4">
