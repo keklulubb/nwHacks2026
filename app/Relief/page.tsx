@@ -13,7 +13,25 @@ export default async function ReliefCenter() {
       console.log("regenerate gemini relief recs");
       reliefRecs = []; //for debug
       if (process.env.DEBUG_MODE) {
-          reliefRecs = ["a", "b", "c", "d"];
+          reliefRecs = ["Upbeat Indie Folk", "\"POV Walking Tours\"", "\"Round the Block\" Reset", "At a **65/100**, you are still in positive territory, but the \"battery\" is starting to drain slightly. You might be feeling the \"Sunday Scaries\" or just a bit of accumulated fatigue from the week. The goal now is to gently lift your energy and prevent that number from sliding further down.\n" +
+          "\n" +
+          "Here are three activities to help you reset, based on what worked for you in the data you provided (specifically the positive impact of novelty and movement).\n" +
+          "\n" +
+          "### 1. 🎧 Music Genre: Upbeat Indie Folk\n" +
+          "Since it is Sunday morning, you want music that feels like \"sunshine\" to counteract the lower mood score.\n" +
+          "*   **The Vibe:** Acoustic guitars, slightly faster tempos, and warm vocals. It’s energetic enough to wake you up but cozy enough for a weekend.\n" +
+          "*   **Artists to try:** *The Lumineers, Vance Joy, Noah Kahan, or Jack Johnson.*\n" +
+          "*   **Why this works:** This genre bridges the gap between relaxation and energy. It helps you transition from \"tired\" to \"awake\" without the aggression of high-intensity pop or rock.\n" +
+          "\n" +
+          "### 2. 📺 Video Style: \"POV Walking Tours\" (Virtual Travel)\n" +
+          "Your data showed that **\"Visit a new cafe\" (+15)** was a big restorative hit for you. Since you might not want to leave the house right this second, simulate that sense of novelty.\n" +
+          "*   **What to search:** *\"4K POV walking tour Tokyo rain,\" \"Swiss village walking tour,\"* or *\"New York City ambient walk.\"*\n" +
+          "*   **Why this works:** These videos provide \"visual novelty.\" They trick your brain into feeling like you are exploring a new environment (which your data proves you enjoy) without requiring the effort of dressing up and commuting. It provides a mental escape from the current stress.\n" +
+          "\n" +
+          "### 3. 👟 The Wildcard: The \"Round the Block\" Reset\n" +
+          "Your data is very clear: **\"Work out\" (+15)** and **\"Go on a walk\" (+10)** are reliable ways for you to reduce stress. However, when you feel 65/100, a full workout might feel daunting.\n" +
+          "*   **The Activity:** Commit to leaving your house for **only 10 minutes**. Just walk around the block once and come back.\n" +
+          "*   **Why this works:** You don't need to commit to a full \"exercise\" session. The combination of fresh air and physical movement triggers a biological reset. Based on your stats, physical movement is one of your most consistent tools for feeling better—this is a \"micro-dose\" of that remedy."];
       }
       else {
           reliefRecs = await suggestDeStress(stressLevel);
@@ -100,9 +118,9 @@ export default async function ReliefCenter() {
           <div className="flex items-center gap-2 mb-6">
                     <Sparkles className="text-indigo-400" size={20} />
                     <h3 className="text-xl font-bold font-display">Gemini Audit</h3>
-                    <div>
+                    <p text-align="left">
                         <Markdown>{reliefRecs[3]}</Markdown>
-                    </div>
+                    </p>
             </div>
             </div> 
 
