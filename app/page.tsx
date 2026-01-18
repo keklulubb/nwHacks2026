@@ -52,7 +52,7 @@ export default function HomePage() {
     e.preventDefault();
     const name = (document.getElementById('taskName') as HTMLInputElement).value;
     if (!name) return;
-    const newTask = { id: Date.now(), title: name, deadline: "2024-01-20", priority: "High", completed: false };
+    const newTask = { id: Date.now(), title: name, deadline: "2024-01-20", priority: "High", completed: false, completedDate: 0, stressBefore: 0, stressAfter: 0,  };
     setTasks([...tasks, newTask]);
     addNewTask(newTask);
     setIsAddTaskOpen(false);
