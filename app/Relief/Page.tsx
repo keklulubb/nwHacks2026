@@ -48,20 +48,35 @@ export default function ReliefCenter() {
             </button>
           </div>
 
-          {/* CARD 3: APPLE BOOKS */}
-          <div className="bg-white/50 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/50 shadow-xl hover:-translate-y-2 transition-all flex flex-col items-center">
-            <span className="text-5xl inline-flex items-center mb-4">
-              <svg viewBox="0 0 24 24" className="w-[1em] h-[1em]" fill="#F97316" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.1-1.5 5.5-1.5 1.45 0 3.4.45 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.45-.75-2.25-1z"/>
-              </svg>
-            </span>
-            <h3 className="text-slate-900 mt-2 textxl font-bold leading-relaxed">
-              Short, curated reads to calm the racing mind.
-            </h3>
-            <button className="mt-auto w-full py-4 bg-orange-500 text-white rounded-2xl font-bold shadow-lg shadow-orange-200/50 hover:scale-[1.02] transition-transform">
-              Read in Books
-            </button>
-          </div>
+          {/* CARD 3: PHYSICAL EXERCISE */}
+        <div className="bg-white/50 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/50 shadow-xl hover:-translate-y-2 transition-all flex flex-col items-center">
+        <span className="text-5xl inline-flex items-center mb-4">
+            {/* Heart Activity SVG - Using a "Pulse Red" (#ef4444) */}
+            <svg 
+            viewBox="0 0 24 24" 
+            className="w-[1em] h-[1em]" 
+            fill="none" 
+            stroke="#ef4444" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            xmlns="http://www.w3.org/2000/svg"
+            >
+            
+            <path d="M12.5 15.5l-1-1 1-1m4 0l1 1-1 1" opacity="0.3"/>
+            <path d="M20.5 11.5a4.5 4.5 0 0 0-8.5-2 4.5 4.5 0 0 0-8.5 2c0 4 4.5 8 8.5 10.5 4-2.5 8.5-6.5 8.5-10.5z" stroke="#ef4444" fill="#fee2e2" />
+            </svg>
+        </span>
+    
+        
+        <h3 className="text-sm font-bold text-slate-900 font-display">
+            Low-intensity physical movement designed to lower cortisol and reset your heart rate.
+        </h3>
+        
+        <button className="mt-auto w-full py-4 bg-rose-500 text-white rounded-2xl font-bold shadow-lg shadow-rose-200/50 hover:scale-[1.02] transition-transform">
+            Start Movement
+        </button>
+        </div>
         
 
          <div className="bg-white/50 backdrop-blur-xl md:col-span-3 p-30 rounded-[2.5rem] border border-white/50 shadow-xl hover:-translate-y-2 transition-all flex flex-col items-center">
